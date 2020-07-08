@@ -14,7 +14,7 @@ LOG.setLevel(logging.INFO)
 
 class Cit:
 
-    def __init__(self, input_data, t_value, constraints):
+    def __init__(self, input_data, t_value, constraints, cycles):
         """
         Creation of CombinationMatrix from user input
 
@@ -31,6 +31,7 @@ class Cit:
         # Combinations which do not match to the constraints are disabled
         self.solver.clean_hash_table(self.combination_matrix, t_value)
         self.final_matrix = []
+        self.ITERATIONS_SIZE = cycles
         self.__throbber = Throbber()
 
     def final_matrix_init(self):
@@ -62,7 +63,7 @@ class Cit:
         """
         self.final_matrix = self.final_matrix_init()
         matrix = [x[:] for x in self.final_matrix]
-        iterations = ITERATIONS_SIZE
+        iterations = self.ITERATIONS_SIZE
         step_size = 1
         deleted_rows = []
         while step_size != 0:
@@ -79,7 +80,7 @@ class Cit:
                 step_size *= 2
                 LOG.debug("-----solution with size %s was found-----\n",
                           len(matrix))
-                iterations = ITERATIONS_SIZE
+                iterations = self.ITERATIONS_SIZE
             else:
                 LOG.debug("-----solution with size %s was not found-----\n",
                           len(matrix))

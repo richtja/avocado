@@ -26,6 +26,7 @@ from avocado_varianter_cit.Parser import Parser
 
 #: The default order of combinations
 DEFAULT_ORDER_OF_COMBINATIONS = 2
+DEFAULT_CYCLE_NUMBER = 600
 
 
 class VarianterCitCLI(CLI):
@@ -61,6 +62,14 @@ class VarianterCitCLI(CLI):
                                      metavar='ORDER',
                                      default=DEFAULT_ORDER_OF_COMBINATIONS,
                                      long_arg='--cit-order-of-combinations')
+            settings.register_option(section="{}.cit".format(name),
+                                     key='cycle_number',
+                                     key_type=int,
+                                     parser=subparser,
+                                     help_msg=help_msg,
+                                     metavar='ORDER',
+                                     default=DEFAULT_CYCLE_NUMBER,
+                                     long_arg='--cit-cycle-number')
 
     def run(self, config):
         if config.get('variants.debug'):
@@ -80,6 +89,7 @@ class VarianterCit(Varianter):
         subcommand = config.get('subcommand')
         self.variants = None  # pylint: disable=W0201
         order = config.get("{}.cit.combination_order".format(subcommand))
+        cycles = config.get("{}.cit.cycle_number".format(subcommand))
         if order and order > 6:
             LOG_UI.error("The order of combinations is bigger then 6")
             self.error_exit(config)
@@ -103,7 +113,7 @@ class VarianterCit(Varianter):
 
         input_data = [len(parameter[1]) for parameter in parameters]
 
-        cit = Cit(input_data, order, constraints)
+        cit = Cit(input_data, order, constraints, cycles)
         final_list = cit.compute()
         self.headers = [parameter[0] for parameter in parameters]  # pylint: disable=W0201
         results = [[parameters[j][1][final_list[i][j]] for j in range(len(final_list[i]))]
