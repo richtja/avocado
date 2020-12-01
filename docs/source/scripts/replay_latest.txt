@@ -1,0 +1,10 @@
+avocado replay latest
+WARNING:root:No python imaging library installed. Screendump and Windows guest BSOD detection are disabled. In order to enable it, please install python-imaging or the equivalent for your distro.
+WARNING:root:No python imaging library installed. PPM image conversion to JPEG disabled. In order to enable it, please install python-imaging or the equivalent for your distro.
+JOB ID     : 5dec5f7d38d21f2a3313dcf06593675099125e53
+SRC JOB ID : latest
+JOB LOG    : /home/jarichte/avocado/job-results/job-2020-12-01T15.31-5dec5f7/job.log
+ (1-1/1) https://google.com/:  PASS (0.08 s)
+RESULTS    : PASS 1 | ERROR 0 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
+JOB HTML   : /home/jarichte/avocado/job-results/job-2020-12-01T15.31-5dec5f7/results.html
+JOB TIME   : 0.46 s

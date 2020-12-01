@@ -4,6 +4,7 @@
 import errno
 import importlib
 import os
+import shutil
 import subprocess
 import sys
 
@@ -38,12 +39,16 @@ except path.CmdNotFoundError:
 
 def generate_scripts():
     scrips_path = os.path.join(ROOT_PATH, 'examples', 'doc')
+    dir_path = os.path.join(ROOT_PATH, 'docs', 'source', 'scripts')
+    if os.path.isdir(dir_path):
+        shutil.rmtree(dir_path)
+    os.mkdir(dir_path)
     for entry in os.scandir(scrips_path):
         if entry.path.endswith(".sh"):
             with open(entry.path) as file:
                 script_lines = file.readlines()[2:]
-            out_path = os.path.join(os.path.dirname(entry.path), 'output',
-                                    "%s.txt" % os.path.splitext(entry.name)[0])
+            out_path = os.path.join(dir_path, "%s.txt" %
+                                    os.path.splitext(entry.name)[0])
             with open(out_path, "w") as output_file:
                 output_file.writelines(script_lines)
                 output_file.flush()

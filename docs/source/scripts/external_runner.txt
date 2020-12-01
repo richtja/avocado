@@ -1,0 +1,12 @@
+echo "exit 0" > /tmp/pass
+echo "exit 1" > /tmp/fail
+avocado run --external-runner=/bin/sh /tmp/pass /tmp/fail
+WARNING:root:No python imaging library installed. Screendump and Windows guest BSOD detection are disabled. In order to enable it, please install python-imaging or the equivalent for your distro.
+WARNING:root:No python imaging library installed. PPM image conversion to JPEG disabled. In order to enable it, please install python-imaging or the equivalent for your distro.
+JOB ID     : df7259e1524128b9c9db4ea654b19eee131e16e1
+JOB LOG    : /home/jarichte/avocado/job-results/job-2020-12-01T15.30-df7259e/job.log
+ (1/2) /tmp/pass:  PASS (0.01 s)
+ (2/2) /tmp/fail:  FAIL: Exited with status: '1', stdout: '' stderr: '' (0.12 s)
+RESULTS    : PASS 1 | ERROR 0 | FAIL 1 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
+JOB HTML   : /home/jarichte/avocado/job-results/job-2020-12-01T15.30-df7259e/results.html
+JOB TIME   : 0.48 s

@@ -1,0 +1,11 @@
+avocado run --failfast /bin/true /bin/false /bin/true /bin/true
+WARNING:root:No python imaging library installed. Screendump and Windows guest BSOD detection are disabled. In order to enable it, please install python-imaging or the equivalent for your distro.
+WARNING:root:No python imaging library installed. PPM image conversion to JPEG disabled. In order to enable it, please install python-imaging or the equivalent for your distro.
+JOB ID     : 18586a9cc43c2c515ce29dcf5442741b3c2fc68c
+JOB LOG    : /home/jarichte/avocado/job-results/job-2020-12-01T15.30-18586a9/job.log
+ (1/4) /bin/true:  PASS (0.01 s)
+ (2/4) /bin/false:  FAIL: Exited with status: '1', stdout: '' stderr: '' (0.12 s)
+Interrupting job (failfast).
+RESULTS    : PASS 1 | ERROR 0 | FAIL 1 | SKIP 2 | WARN 0 | INTERRUPT 0 | CANCEL 0
+JOB HTML   : /home/jarichte/avocado/job-results/job-2020-12-01T15.30-18586a9/results.html
+JOB TIME   : 0.52 s
