@@ -41,11 +41,11 @@ def generate_scripts():
     for entry in os.scandir(scrips_path):
         if entry.path.endswith(".sh"):
             with open(entry.path) as file:
-                script = file.readlines()[1]
+                script_lines = file.readlines()[2:]
             out_path = os.path.join(os.path.dirname(entry.path), 'output',
                                     "%s.txt" % os.path.splitext(entry.name)[0])
             with open(out_path, "w") as output_file:
-                output_file.write("%s" % script)
+                output_file.writelines(script_lines)
                 output_file.flush()
                 subprocess.run(entry.path, stdout=output_file,
                                stderr=output_file)
