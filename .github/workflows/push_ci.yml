@@ -2,7 +2,7 @@ name: "PR and Push checks"
 
 on:
   push:
-    branches: [ "master", "103lts" ]
+    branches: [ "master", "codecov", "103lts" ]
   pull_request:
     branches: [ "master", "codecov", "103lts" ]
 
