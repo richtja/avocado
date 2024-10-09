@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master", "103lts" ]
   pull_request:
-    branches: [ "master", "103lts" ]
+    branches: [ "master", "codecov", "103lts" ]
 
 jobs:
   analyze:
