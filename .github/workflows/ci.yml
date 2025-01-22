@@ -140,7 +140,14 @@ jobs:
       - name: List test
         run: python -m avocado --verbose list selftests/unit/* selftests/functional/* selftests/*sh
       - name: Run a subset of avocado's selftests
-        run: python -m avocado --show avocado run -- selftests/functional/basic.py:RunnerOperationTest.test_store_logging_stream_external
+        run: python -m avocado run --job-timeout=300 examples/tests/external_logging_stream.py
+      - name: Save logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Test_logs
+          path: /Users/runner/avocado/job-results/latest/
+          retention-days: 1
       - run: echo "🥑 This job's status is ${{ job.status }}."
 
 
