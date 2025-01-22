@@ -79,7 +79,10 @@ jobs:
       - name: Build documentation readthedocs
         run: |
           make -f Makefile.gh build-update-readthedocs
-      - run: echo "In a few minutes the release documentation will be available in https://${{ github.event.inputs.rtd_project }}.readthedocs.io/en/${{ github.event.inputs.version }}/"
+      - run: >-
+          echo In a few minutes the release documentation will be available at
+          https://${{ github.event.inputs.rtd_project }}.readthedocs.io/en/${{ github.event.inputs.version }}/
+          | tee -a "${GITHUB_STEP_SUMMARY}"
 
   publish-to-pypi:
     name: Publish Avocado to PyPI
@@ -88,7 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/avocado-framework
+      url: https://pypi.org/project/avocado-framework/${{ github.event.inputs.version }}
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
@@ -106,7 +109,7 @@ jobs:
     needs: release
     strategy:
       matrix:
-        python-version: [3.8.16, 3.9.16, 3.10.9, 3.11.1, 3.12.0]
+        python-version: [3.8.16, 3.9.16, 3.10.9, 3.11.1, 3.12.0, 3.13.0]
       fail-fast: false
 
     steps:
