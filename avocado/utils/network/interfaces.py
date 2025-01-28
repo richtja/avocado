@@ -82,6 +82,7 @@ class NetworkInterface:
         else:
             msg = "Distro not supported by API. Could not get interface filename."
             LOG.error(msg)
+        return None
 
     @property
     def slave_config_filename(self):
@@ -100,7 +101,7 @@ class NetworkInterface:
         except Exception:
             msg = "Slave config filename not available"
             LOG.debug(msg)
-            return
+            return None
 
     def _get_interface_details(self, version=None):
         cmd = f"ip -j link show {self.name}"
@@ -340,7 +341,7 @@ class NetworkInterface:
         except (NWException, IndexError):
             msg = f"Could not get ip addresses for {self.name}"
             LOG.debug(msg)
-            return []
+        return []
 
     def get_hwaddr(self):
         """Get the Hardware Address (MAC) of this interface.
@@ -867,3 +868,4 @@ class NetworkInterface:
             return interface_type
         elif self.is_veth():
             return self.name
+        return None
