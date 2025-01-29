@@ -736,7 +736,8 @@ class NetworkInterface:
             msg = f"Failed to ping. {ex}"
             raise NWException(msg) from ex
 
-    def netmask_to_cidr(self, netmask):
+    @staticmethod
+    def netmask_to_cidr(netmask):
         """Function is used to check the netmask value and convert
 
         it into short form (mask) of netmask values
@@ -748,7 +749,8 @@ class NetworkInterface:
         """
         return sum(bin(int(bits)).count("1") for bits in netmask.split("."))
 
-    def validate_ipv4_format(self, ip):
+    @staticmethod
+    def validate_ipv4_format(ip):
         """
         This function validates IPv4 address with following format set.
 
@@ -774,7 +776,8 @@ class NetworkInterface:
             return False
         return True
 
-    def validate_ipv4_netmask_format(self, netmask):
+    @staticmethod
+    def validate_ipv4_netmask_format(netmask):
         """
         This function validates IPv4 Netmask address with following format set.
 
@@ -813,7 +816,8 @@ class NetworkInterface:
             first_bit = False
         return True
 
-    def ping_flood(self, int_name, peer_ip, ping_count):
+    @staticmethod
+    def ping_flood(int_name, peer_ip, ping_count):
         """
         Function to start ping to remote machine with "-f" [ flood ] option,
         on given interface.
