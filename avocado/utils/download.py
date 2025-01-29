@@ -45,23 +45,24 @@ def url_open(url, data=None, timeout=5):
     :raises: `URLError`.
     """
     try:
-        with urlopen(url, data=data, timeout=timeout) as result:
-            msg = (
-                'Opened URL "%s" and received response with headers including: '
-                'content-length %s, date: "%s", last-modified: "%s"'
-            )
-            log.debug(
-                msg,
-                url,
-                result.headers.get("Content-Length", "UNKNOWN"),
-                result.headers.get("Date", "UNKNOWN"),
-                result.headers.get("Last-Modified", "UNKNOWN"),
-            )
-            return result
+        result = urlopen(url, data=data, timeout=timeout)
     except (socket.timeout, HTTPError) as ex:
         msg = f"Failed downloading file: {str(ex)}"
         log.error(msg)
         return None
+
+    msg = (
+        'Opened URL "%s" and received response with headers including: '
+        'content-length %s, date: "%s", last-modified: "%s"'
+    )
+    log.debug(
+        msg,
+        url,
+        result.headers.get("Content-Length", "UNKNOWN"),
+        result.headers.get("Date", "UNKNOWN"),
+        result.headers.get("Last-Modified", "UNKNOWN"),
+    )
+    return result
 
 
 def _url_download(url, filename, data):
