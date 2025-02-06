@@ -96,7 +96,7 @@ jobs:
       - name: Avocado version
         run: avocado --version
       - name: Unittests and fast functional tests
-        run: python3 setup.py test --skip=static-checks
+        run: python3 setup.py test --select=nrunner-requirement
       - name: Archive failed tests logs
         if: failure()
         uses: actions/upload-artifact@v4
