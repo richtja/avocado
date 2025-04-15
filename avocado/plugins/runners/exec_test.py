@@ -172,7 +172,6 @@ class ExecTestRunner(BaseRunner):
         try:
             process = subprocess.Popen(
                 [runnable.uri] + list(runnable.args),
-                stdin=subprocess.DEVNULL,
                 stdout=stdout_pipe,
                 stderr=stderr_pipe,
                 env=self._get_env(runnable),

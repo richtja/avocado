@@ -1,7 +1,9 @@
 import glob
 import os
 import signal
+import sys
 import time
+import unittest
 
 from avocado.utils import process, script
 from selftests.utils import AVOCADO, TestCaseTmpDir
@@ -31,6 +33,10 @@ done
 
 
 class RunnerOperationTest(TestCaseTmpDir):
+    @unittest.skipIf(
+        sys.platform.startswith("darwin"),
+        "The test pause feature is not supported on macOS",
+    )
     def test_pause(self):
         def count_lines(file_path):
             with open(os.path.join(file_path, "sleep.txt"), encoding="utf-8") as file:
